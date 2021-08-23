@@ -1,0 +1,21 @@
+<?php
+/**
+ * My Points
+ *
+ * @copyright Copyright © 2021 Staempfli AG. All rights reserved.
+ * @author    juan.alonso@staempfli.com
+ */
+$data = $block->getViewModel();
+$point = $data->getDataPoint();
+?>
+<h1> My Points & Reward</h1>
+<div>
+    <div style="width: 200px;height: 100px;background-color: #2ca02c;color: white;text-align: center;padding-top:50px;font-size:18px">
+        Point : <?php echo $block->escapeHtml($point->getPoint()); ?>
+    </div>
+    <br>
+    <div style="width: 200px;height: 100px;background-color: #00ade2;color: white;text-align: center;padding-top:50px;font-size:18px">
+        Point Spent : <?php echo $block->escapeHtml($point->getPointSpent()); ?>
+    </div>
+</div>
+
