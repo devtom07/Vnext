@@ -7,12 +7,10 @@ use Vnext\RewardPoints\Model\ResourceModel\Earningrate\CollectionFactory;
 class Cart
 {
     protected $earning;
-
     public function __construct(CollectionFactory $earning)
     {
         $this->earning = $earning;
     }
-
     public function afterGetSectionData(\Magento\Checkout\CustomerData\Cart $subject, array $result)
     {
         $point = $this->earning->create();
