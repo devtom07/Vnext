@@ -116,17 +116,21 @@ class Index extends \Magento\Framework\App\Action\Action
         }
         //
         $rewardpoints = round(($point * $discount_reserved) / $spending_point);
-        $send = array('keyword' => 'Success appyle points');
-
-        $quote = $this->checkoutSession->getQuoteId();
+        $quote = $this->checkoutSession->getQuote();
+        $total = $quote->getBaseGrandTotal();
+        $discount = $rewardpoints/(int)$total;
+        if($discount>0.2){
+            $send = array('keyword' => 'Your discount is too much for your order.Please enter less points');
+            return $resultJson->setData($send);
+        }
+        $quote_id = $this->checkoutSession->getQuoteId();
         $money_quote = $this->moneypoint->create();
-        $money_quote->setData('quote_id', $quote);
+        $money_quote->setData('quote_id', $quote_id);
         $money_quote->setData('money', $rewardpoints);
         $money_quote->setData('point', $point);
         $this->moneypointresource->save($money_quote);
 
-        $this->_cacheTypeList->cleanType('full_page');
-
+        $send = array('keyword' => 'Success appyle points');
         return $resultJson->setData($send);
     }
 
