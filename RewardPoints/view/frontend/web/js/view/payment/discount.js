@@ -3,9 +3,10 @@ define([
         'uiComponent',
         'mage/url',
         'mage/storage',
-        'Magento_Customer/js/model/customer'
+        'Magento_Customer/js/model/customer',
+        'Magento_Ui/js/model/messageList',
     ],
-    function (ko, Component, urlBuilder, storage, customer) {
+    function (ko, Component, urlBuilder, storage, customer,messageList) {
         'use strict';
         var check = customer.isLoggedIn()
         return Component.extend({
@@ -27,8 +28,10 @@ define([
                     JSON.stringify({'keyword': data}),
                     false
                 ).done(function (response) {
-                        window.location.reload();
+                    alert(response.keyword);
+                    window.location.reload();
                     }
+
                 ).fail(function (response) {
                     // code khi fail
                 });

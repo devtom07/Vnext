@@ -61,7 +61,8 @@ class CustomPoint implements ObserverInterface
             if ($checkpoint != null){
                 foreach ($earning_point as $data) {
                     $money_spent = $data->getMoneySpent();
-                    $earning = round($total / $money_spent);
+                    $earningPoint = $data->getEaringPoints();
+                    $earning = round($total / $money_spent * $earningPoint);
                 }
             }else{
                 $earning = 0;

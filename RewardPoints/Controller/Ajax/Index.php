@@ -53,6 +53,7 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     protected $messageManager;
 
+
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\Serialize\Serializer\Json $json,
@@ -99,7 +100,8 @@ class Index extends \Magento\Framework\App\Action\Action
 
         $array = $result->getData();
         if(count($array) == 0){
-            throw new \Exception('Not Found Spending Rate');
+            $send = array('keyword' => 'Not Found Spending Rate');
+            return $resultJson->setData($send);
         }
         $discount_reserved = $array[0]['discount_reserved'];
         $spending_point = $array[0]['spending_point'];
@@ -109,11 +111,12 @@ class Index extends \Magento\Framework\App\Action\Action
         $model = $this->pointFactory->create();
         $quantity_point = $model->load($id_customer,'customer_id')->getPoint();
         if ($quantity_point<$point){
-            throw new \Exception('Your bonus points are not enough');
+            $send = array('keyword' => 'Your bonus points are not enough');
+            return $resultJson->setData($send);
         }
         //
         $rewardpoints = round(($point * $discount_reserved) / $spending_point);
-        $send = array('keyword' => $rewardpoints);
+        $send = array('keyword' => 'Success appyle points');
 
         $quote = $this->checkoutSession->getQuoteId();
         $money_quote = $this->moneypoint->create();
