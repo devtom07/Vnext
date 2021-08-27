@@ -28,8 +28,8 @@ define([
                     JSON.stringify({'keyword': data}),
                     false
                 ).done(function (response) {
-                    alert(response.keyword);
                     window.location.reload();
+                    alert(response.keyword);
                     }
 
                 ).fail(function (response) {
