@@ -85,7 +85,7 @@ class Save extends \Vnext\RewardPoints\Controller\Adminhtml\Earningrate\Block im
 
             try {
                 $this->resource->save($model);
-                $this->messageManager->addSuccessMessage(__('You saved the block.'));
+                $this->messageManager->addSuccessMessage(__('You saved earning rate .'));
                 $this->dataPersistor->clear('students');
                 // return $this->processBlockReturn($model, $data, $resultRedirect);
             } catch (LocalizedException $e) {
