@@ -46,7 +46,6 @@ class CustomPoint implements ObserverInterface
         }
         return $point;
     }
-
     public function execute(Observer $observer)
     {
         $pointFactory = $this->_pointFactory->create();
