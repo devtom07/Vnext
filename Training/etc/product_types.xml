@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * product_types
+ *
+ * @copyright Copyright © 2021 Staempfli AG. All rights reserved.
+ * @author    juan.alonso@staempfli.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Catalog:etc/product_types.xsd">
+
+    <type name="custom_product_type_code" label="Custom Product Type" modelInstance="Vnext\Training\Model\Product\Type"></type>
+    <composableTypes>
+        <type name="custom_product_type_code" />
+    </composableTypes>
+</config>

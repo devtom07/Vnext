@@ -1,0 +1,26 @@
+<?php
+
+/** @var $viewModel \Devhooks\HelloWorld\ViewModel\MyNewViewModel */
+
+$viewModel = $block->getViewModel();
+$students = $viewModel->getDataStudent();
+?>
+<?php
+foreach ($students as $student): ?>
+    <div>
+        <b>Name : <?php echo $block->escapeHtml($student->getName()); ?></b>
+        <br>
+        <br>
+        <b>Dob : <?php echo $block->escapeHtml($student->getDob()); ?></b>
+        <br>
+        <br>
+        <b>Gender : <?php echo $block->escapeHtml($student->getGender()); ?></b>
+        <br>
+        <br>
+        <b>Address : <?php echo $block->escapeHtml($student->getAddress()); ?></b>
+
+    </div>
+
+<?php
+endforeach;
+?>

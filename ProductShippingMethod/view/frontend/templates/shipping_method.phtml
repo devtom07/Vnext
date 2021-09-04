@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/**
+ * Product additional attributes template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Attributes
+ */
+?>
+<?php $product = $block->getProduct(); ?>
+<?php
+$shippingFee = $this->getAdditionalDataShipFee();
+$shippingMethod = $this->getAdditionalDataFeeMethod();
+
+?>
+<div class="additional-attributes-wrapper table-wrapper">
+    <div>Shipping Method#:
+        <?= $shippingMethod ?>
+    </div>
+    <div>
+        Shipping Fee#:
+        <?= '$'.$shippingFee; ?>
+    </div>
+</div>
+<?php
+
