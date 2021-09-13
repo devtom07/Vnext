@@ -48,6 +48,7 @@ class CustomPoint implements ObserverInterface
     }
     public function execute(Observer $observer)
     {
+        $expirationdate = mktime(0, 0, 0, date("m"), date("d")+30, date("Y"));
         $pointFactory = $this->_pointFactory->create();
         $order = $observer->getEvent()->getOrder();
         $point = $this->getPoint();
@@ -74,12 +75,16 @@ class CustomPoint implements ObserverInterface
                 $pointFactory->load($customerId,'customer_id');
                 $pointFactory->setPoint($point_update);
                 $pointFactory->setPointSpent($customerPointSpent+$point);
+                $pointFactory->setPointEarning($customerPoint + $earning);
+                $pointFactory->setExpirationDate(date("d/m/Y",$expirationdate));
                 $pointFactory->save();
             } else {
                 $pointFactory->setPoint($earning);
                 $pointFactory->setCustomerId($customerId);
                 $pointFactory->setCustomerEmail($customEmail);
                 $pointFactory->setPointSpent("0");
+                $pointFactory->setPointEarning($earning);
+                $pointFactory->setExpirationDate(date("d/m/Y",$expirationdate));
                 $pointFactory->save();
             }
         }
