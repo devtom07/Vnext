@@ -31,8 +31,10 @@
                 comment="Entity ID"/>
         <column xsi:type="int"  name="point" nullable="true" comment="Point" />
         <column xsi:type="int"  name="point_spent" nullable="true" comment="Point Spent" />
+        <column xsi:type="int"  name="point_earning" nullable="true" comment="Point Earning" />
         <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="CUSTOMER ID"/>
         <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Email"/>
+        <column xsi:type="varchar" name="expiration_date" nullable="false" length="255" comment="Expiration Date"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
         </constraint>

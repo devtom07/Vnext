@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
-    <menu>
-        <add id="Vnext_Training::training" title="Training" module="Vnext_Training" sortOrder="51" resource="Vnext_Training::training"/>
-        <add id="Vnext_Training::student" title="Manage Student" module="Vnext_Training" sortOrder="10" action="admin_student/student" resource="Vnext_Training::student" parent="Vnext_Training::training"/>
-        <add id="Vnext_Training::training_configuration" title="Configuration" module="Vnext_Training" sortOrder="99" parent="Vnext_Training::training" action="adminhtml/system_config/edit/section/training" resource="Vnext_Training::training_configuration"/>
-    </menu>
-</config>

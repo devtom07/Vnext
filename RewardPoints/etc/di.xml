@@ -39,4 +39,18 @@
     <type name="Magento\Checkout\CustomerData\Cart">
         <plugin name="cartPrivateDataDiscount" type="Vnext\RewardPoints\Plugin\Checkout\CustomerData\Cart"/>
     </type>
+    <!--    Custom Point Admin Gird-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="customer_point_listing_data_source" xsi:type="string">Vnext\RewardPoints\Model\ResourceModel\Point\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Vnext\RewardPoints\Model\ResourceModel\Point\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">customer_point</argument>
+            <argument name="resourceModel" xsi:type="string">Vnext\RewardPoints\Model\ResourceModel\Point</argument>
+        </arguments>
+    </virtualType>
 </config>
