@@ -50,4 +50,19 @@
             <column name="entity_id"/>
         </constraint>
     </table>
+    <table name="transactions" resource="default" engine="innodb" comment="Money Point">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar"  name="comment" nullable="true" comment="Comment" />
+        <column xsi:type="varchar"  name="amount" nullable="true" comment="Amount" />
+        <column xsi:type="varchar"  name="status" nullable="true" comment="Status" />
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="CUSTOMER ID"/>
+        <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Email"/>
+        <column xsi:type="date"  name="expiration_date" nullable="true" comment="Expiration Date " />
+        <column xsi:type="timestamp"  name="create_at" default="CURRENT_TIMESTAMP" nullable="true" comment="Create at" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+
 </schema>

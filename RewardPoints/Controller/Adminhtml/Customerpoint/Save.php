@@ -11,6 +11,7 @@ use Vnext\RewardPoints\Model\PointFactory;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
+use Vnext\RewardPoints\Model\TransactionFactory;
 
 /**
  * Save CMS block action.
@@ -20,6 +21,7 @@ class Save extends \Vnext\RewardPoints\Controller\Adminhtml\Earningrate\Block im
     /**
      * @var DataPersistorInterface
      */
+    protected $_transactionFactory;
     protected $dataPersistor;
 
     /**
@@ -44,10 +46,13 @@ class Save extends \Vnext\RewardPoints\Controller\Adminhtml\Earningrate\Block im
         Registry $coreRegistry,
         DataPersistorInterface $dataPersistor,
         PointFactory $customerpointFactory,
+        TransactionFactory $_transactionFactory,
         Resource $resource
+
     ) {
         $this->dataPersistor = $dataPersistor;
         $this->customerpointFactory = $customerpointFactory;
+        $this->_transactionFactory = $_transactionFactory;
         $this->resource = $resource;
         parent::__construct($context, $coreRegistry);
     }
@@ -70,8 +75,16 @@ class Save extends \Vnext\RewardPoints\Controller\Adminhtml\Earningrate\Block im
 
             /** @var \Magento\Cms\Model\Block $model */
             $model = $this->customerpointFactory->create();
-
+            $transaction = $this->_transactionFactory->create();
             $id = $this->getRequest()->getParam('entity_id');
+            //transaction get data
+            $pointData = $model->load($id);
+            $comment = $this->getRequest()->getParam('comment');
+            $customerId = $pointData->getData('customer_id');
+            $customerEmail = $pointData->getData('customer_email');
+            $expirationDate = $this->getRequest()->getParam('expiration_date');
+            $point = $this->getRequest()->getParam('point');
+
             if ($id) {
                 try {
                     $this->resource->load($model, $id);
@@ -80,8 +93,16 @@ class Save extends \Vnext\RewardPoints\Controller\Adminhtml\Earningrate\Block im
                     return $resultRedirect->setPath('*/*/');
                 }
             }
-            $model->setData($data);
 
+            $model->setData($data);
+            //transaction
+            $transaction->setComment($comment);
+            $transaction->setAmount($point);
+            $transaction->setStatus('cancel');
+            $transaction->setCustomerId($customerId);
+            $transaction->setCustomerEmail($customerEmail);
+            $transaction->setExpirationDate($expirationDate);
+            $transaction->save();
             try {
                 $this->resource->save($model);
                 $this->messageManager->addSuccessMessage(__('You saved customer point rate .'));

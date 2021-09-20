@@ -86,11 +86,11 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $this->initPage($resultPage)->addBreadcrumb(
-            $id ? __('Edit Spending Rate') : __('New Block'),
-            $id ? __('Edit Spending Rate') : __('New Block')
+            $id ? __('Edit Spending Rate') : __('Edit Block'),
+            $id ? __('Edit Spending Rate') : __('Edit Block')
         );
         $resultPage->getConfig()->getTitle()->prepend(__('Spending Rate Detail'));
-        $resultPage->getConfig()->getTitle()->prepend($model->getId() ? 'Spending Rate Detail' : __('New Spending Rate'));
+        $resultPage->getConfig()->getTitle()->prepend($model->getId() ? 'Spending Rate Detail' : __('Edit Spending Rate'));
         return $resultPage;
 
     }

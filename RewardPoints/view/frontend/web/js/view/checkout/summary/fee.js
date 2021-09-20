@@ -20,11 +20,9 @@ define(
             },
 
             getValue: function() {
-                var price = 0;
-                if (this.totals()) {
-                    price = totals.getSegment('custom_discount').value;
-                }
-                return 15;
+                var price = 11;
+
+                return this.getFormattedPrice(price);
             }
 
 

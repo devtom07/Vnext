@@ -86,10 +86,10 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $this->initPage($resultPage)->addBreadcrumb(
-            $id ? __('Edit Customer Point') : __('New Block'),
-            $id ? __('Edit Customer Point') : __('New Block')
+            $id ? __('Edit Customer Point') : __('Edit Block'),
+            $id ? __('Edit Customer Point') : __('Edit Block')
         );
-        $resultPage->getConfig()->getTitle()->prepend(__('Customer Point Detail'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Customer Point Update'));
         $resultPage->getConfig()->getTitle()->prepend($model->getId() ? 'Customer Point Detail' : __('Customer Point Rate'));
         return $resultPage;
 

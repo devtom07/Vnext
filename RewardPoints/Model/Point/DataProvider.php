@@ -51,12 +51,12 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             $this->loadedData[$block->getId()] = $block->getData();
         }
 
-        $data = $this->dataPersistor->get('earing_rate');
+        $data = $this->dataPersistor->get('customer_point');
         if (!empty($data)) {
             $block = $this->collection->getNewEmptyItem();
             $block->setData($data);
             $this->loadedData[$block->getId()] = $block->getData();
-            $this->dataPersistor->clear('earing_rate');
+            $this->dataPersistor->clear('customer_point');
         }
         return $this->loadedData;
     }
