@@ -5,9 +5,14 @@ define([
         'mage/storage',
         'Magento_Customer/js/model/customer',
         'Magento_Ui/js/model/messageList',
+        'Vnext_RewardPoints/js/view/checkout/summary/fee',
+        'jquery',
+        'Magento_Checkout/js/action/get-totals',
+        'Magento_Checkout/js/action/get-payment-information'
     ],
-    function (ko, Component, urlBuilder, storage, customer,messageList) {
+    function (ko, Component, urlBuilder, storage, customer,messageList,fee,$,getTotalsAction,getPaymentInformation) {
         'use strict';
+
         var check = customer.isLoggedIn()
         return Component.extend({
 
@@ -28,8 +33,13 @@ define([
                     JSON.stringify({'keyword': data}),
                     false
                 ).done(function (response) {
-                    window.location.reload();
                     alert(response.keyword);
+                    window.location.reload();
+                    var deferred = $.Deferred();
+                    getTotalsAction([], deferred);
+                    getPaymentInformation().done(function () {
+                        self.isVisible(true);
+                    });
                     }
 
                 ).fail(function (response) {
@@ -38,6 +48,9 @@ define([
             },
             isLoggedIn: function () {
                 return customer.isLoggedIn();
+            },
+            isDisplayed: function () {
+                return true;
             }
         });
     }

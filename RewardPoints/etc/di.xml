@@ -53,4 +53,32 @@
             <argument name="resourceModel" xsi:type="string">Vnext\RewardPoints\Model\ResourceModel\Point</argument>
         </arguments>
     </virtualType>
+   <!--    transaction admin gird-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="transaction_listing_data_source" xsi:type="string">Vnext\RewardPoints\Model\ResourceModel\Transaction\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Vnext\RewardPoints\Model\ResourceModel\Transaction\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">transactions</argument>
+            <argument name="resourceModel" xsi:type="string">Vnext\RewardPoints\Model\ResourceModel\Transaction</argument>
+        </arguments>
+    </virtualType>
+   <!--    customer-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="customertab_customer_listing_data_source" xsi:type="string">Magento\Customer\Model\ResourceModel\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Magento\Customer\Model\ResourceModel\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">customer_entity</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Customer\Model\ResourceModel\Customer</argument>
+        </arguments>
+    </virtualType>
 </config>

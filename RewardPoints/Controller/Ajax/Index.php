@@ -3,56 +3,24 @@
 namespace Vnext\RewardPoints\Controller\Ajax;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Framework\Exception\AlreadyExistsException;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
-    /**
-     * @var \Magento\Framework\Serialize\Serializer\Json
-     */
     protected $json;
-    /**
-     * @var \Magento\Framework\Controller\Result\JsonFactory
-     */
     protected $resultJsonFactory;
-    /**
-     * @var \Magento\Checkout\Model\Session
-     */
     protected $customerSession;
-    /**
-     * @var \Vnext\RewardPoints\Model\ResourceModel\Spendingrate\CollectionFactory
-     */
     protected $_collectionFactory;
-
     protected $_collection;
-    /**
-     * @var \Magento\Customer\Model\Session
-     */
     private $checkoutSession;
-    /**
-     * @var \Magento\Framework\Pricing\PriceCurrencyInterface
-     */
     protected $_priceCurrency;
-    /**
-     * @var \Vnext\RewardPoints\Model\MoneypointFactory
-     */
     protected $moneypoint;
-    /**
-     * @var \Vnext\RewardPoints\Model\ResourceModel\Moneypoint
-     */
     protected $moneypointresource;
-    /**
-     * @var \Magento\Framework\App\Cache\TypeListInterface
-     */
     protected $_cacheTypeList;
-    /**
-     * @var \Vnext\RewardPoints\Model\PointFactory
-     */
     protected $pointFactory;
-    /**
-     * @var \Magento\Framework\Message\ManagerInterface
-     */
     protected $messageManager;
-
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
@@ -116,7 +84,11 @@ class Index extends \Magento\Framework\App\Action\Action
         }
         //
         $rewardpoints = round(($point * $discount_reserved) / $spending_point);
-        $quote = $this->checkoutSession->getQuote();
+        try {
+            $quote = $this->checkoutSession->getQuote();
+        } catch (NoSuchEntityException $e) {
+        } catch (LocalizedException $e) {
+        }
         $total = $quote->getBaseGrandTotal();
         $discount = $rewardpoints/(int)$total;
         if($discount>0.2){
@@ -128,11 +100,12 @@ class Index extends \Magento\Framework\App\Action\Action
         $money_quote->setData('quote_id', $quote_id);
         $money_quote->setData('money', $rewardpoints);
         $money_quote->setData('point', $point);
-        $this->moneypointresource->save($money_quote);
+        try {
+            $this->moneypointresource->save($money_quote);
+        } catch (AlreadyExistsException $e) {
+        }
 
         $send = array('keyword' => 'Success appyle points');
         return $resultJson->setData($send);
     }
-
-
 }

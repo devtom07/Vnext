@@ -12,7 +12,10 @@
              module="Vnext_RewardPoints" parent="Vnext_RewardPoints::erwardopints"
              sortOrder="10" action="point/spendingrate/index" resource="Vnext_RewardPoints::spendingrate_list"/>
         <add id="Vnext_RewardPoints::customerpoint" title="Customer Point" translate="title"
-             module="Vnext_RewardPoints" parent="Vnext_RewardPoints::erwardopints"
+             module="Vnext_RewardPoints" parent="Magento_Customer::customer"
              sortOrder="10" action="point/customerpoint/index" resource="Vnext_RewardPoints::customerpoint"/>
+        <add id="Vnext_RewardPoints::transaction" title="Transactions" translate="title"
+             module="Vnext_RewardPoints" parent="Vnext_RewardPoints::erwardopints"
+             sortOrder="10" action="point/transaction/index" resource="Vnext_RewardPoints::transaction"/>
     </menu>
 </config>

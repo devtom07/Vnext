@@ -29,7 +29,7 @@ class NameCustomer implements OptionSourceInterface
      */
     public function __construct(
         \Magento\Cms\Model\Block $cmsBlock,
-        \Magento\Customer\Model\CustomerFactory $customerFactory,
+        \Magento\Customer\Model\CustomerFactory $customerFactory
     )
     {
         $this->customerFactory = $customerFactory;
